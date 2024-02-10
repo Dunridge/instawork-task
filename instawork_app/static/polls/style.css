@@ -1,6 +1,7 @@
 
-/* TODO: see how to separate the styles between components  */
+/* TODO: see how to separate the styles between components */
+/* added tailwind.css so the style separation is not needed */
 
 div {
-    color: yellow;
+    /* color: red; */
 }
