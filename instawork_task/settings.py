@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +38,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "instawork_app",
+    "livereload",
+    "tailwind",
+    "theme"
 ]
+
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1"
+]
+
+NPM_BIN_PATH="C:/Program Files/nodejs/npm.cmd" #  match path of NPM executable in your system
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -47,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "livereload.middleware.LiveReloadScript"
 ]
 
 ROOT_URLCONF = "instawork_task.urls"
@@ -54,7 +68,10 @@ ROOT_URLCONF = "instawork_task.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'instawork_app', 'templates', 'instawork_app')
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
