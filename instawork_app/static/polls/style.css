@@ -1,7 +1,9 @@
 
 /* TODO: see how to separate the styles between components */
 /* added tailwind.css so the style separation is not needed */
-/* 
-div {
-    color: red;
-} */
+
+
+/* fix the padding on the radio buttons */
+.add-memebers__option {
+    padding: 8px 0;
+}
