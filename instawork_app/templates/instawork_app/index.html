@@ -2,23 +2,25 @@
 <html lang="en">
 <head>
     {% load static tailwind_tags %}
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team management</title>
-    
     {% tailwind_css %}
-
     {% load static %}
     <link rel="stylesheet" href="{% static "polls/style.css" %}">
 </head>
 <body>
     <div class="text-blue-500">Team management</div>
+    {% include "./components/member.html" %}
+
+
+    {% comment %} TODO: define a card html and print it here in a loop  {% endcomment %}
 
     <!-- TODO: see how to work with UI components in Django -->
 
     <!-- TODO: see how to add different pages  -->
+
     <!-- TODO: add the edit/add/delete a member functionality -->
 </body>
 </html>
