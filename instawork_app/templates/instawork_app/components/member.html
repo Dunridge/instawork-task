@@ -2,7 +2,7 @@
 <div class="w-full cursor-pointer flex justify-start border-t border-eef0ef py-4 last:border-b" onclick="routeToEdit({{ member.id }})">
     <img class="mr-3" width="60" height="60" src="{% static 'no-picture.svg' %}" />
     <div class="">
-        <div class="text-gray-600 font-bold">{{ member.name }} ({{ member.position }})</div>
+        <div class="text-gray-600 font-bold">{{ member.name }} ({{ member.position }}) (index: {{ member.id | default:"empty id" }})</div>
         <div class="text-gray-500">{{ member.phone }}</div>
         <div class="text-gray-500">{{member.email}}</div>
     </div>
@@ -16,7 +16,6 @@
             } else {
                 console.error('Invalid memberId:', memberId);
             }
-            debugger;
         }
     </script>
 </div>
