@@ -4,6 +4,9 @@ def index(request):
     members = [
         {'name': 'John Doe', 'position': 'Developer'},
         {'name': 'Jane Doe', 'position': 'Designer'},
+        {'name': 'Jane Doe', 'position': 'Designer'},
+        {'name': 'Jane Doe', 'position': 'Designer'},
+        {'name': 'Jane Doe', 'position': 'Designer'},
     ]
 
     context = {
@@ -11,8 +14,3 @@ def index(request):
     }
 
     return render(request, 'instawork_app/index.html', context)
-
-# def team_members(request): 
-    
-
-#     return render(request, 'instawork_app/index.html', context)
