@@ -7,6 +7,13 @@
 
     <div class="mt-2 text-xl text-gray-500 font-bold">Info</div>
 
+    {% comment %} TODO: based on this boolean call different post methods  {% endcomment %}
+    {% if is_add_form %}
+        <div>Add Form</div>
+    {% else %}
+        <div>Edit Form</div>
+    {% endif %}
+
     {% comment %} TODO: consider putting into components if you have the time {%
     endcomment %} {% comment %} TODO: figure out how to combine these two forms
     into a single one {% endcomment %} {% comment %} TODO: consider putting this

@@ -19,7 +19,9 @@
             </div>
             <div class="text-gray-500">Set email, location and role</div>
         </div>
-        {% include 'forms/shared_form.html' %}
+
+        {% comment %} TODO: pass a boolean to this template and trigger different urls in the post based on that boolean {% endcomment %}
+        {% include 'forms/shared_form.html' with is_add_form=is_add_form %}
 
         <script>
             function routeToMembers() {

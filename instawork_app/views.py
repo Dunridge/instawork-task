@@ -48,7 +48,11 @@ def index(request):
     return render(request, 'instawork_app/index.html', context)
 
 def add(request): 
-    context = {}
+
+    context = {
+        'is_add_form': True
+    }
+
     if request.method == 'POST': 
         name = request.POST.get('name')
         position = request.POST.get('position')
@@ -71,5 +75,9 @@ def add(request):
     return render(request, 'add_member/index.html', context)
 
 def edit(request): 
-    context = {}
+    
+    context = {
+        'is_add_form': False
+    }
+
     return render(request, 'edit_member/index.html', context)
