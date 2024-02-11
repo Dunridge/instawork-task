@@ -1,5 +1,5 @@
 {% load static %}
-<div class="w-full cursor-pointer flex justify-start border-t border-eef0ef py-4 last:border-b" onclick="routeToEdit()">
+<div class="w-full cursor-pointer flex justify-start border-t border-eef0ef py-4 last:border-b" onclick="routeToEdit({{ member.id }})">
     <img class="mr-3" width="60" height="60" src="{% static 'no-picture.svg' %}" />
     <div class="">
         <div class="text-gray-600 font-bold">{{ member.name }} ({{ member.position }})</div>
@@ -8,8 +8,15 @@
     </div>
 
     <script>
-        function routeToEdit() {
-            window.location.href="{% url 'edit' %}";
+        function routeToEdit(memberId) {
+            // TODO: memberId is sometimes undefined here - solve this error
+            if (memberId) { 
+                const editUrl = '{% url "edit" member_index=0 %}'.replace('0', memberId);
+                window.location.href = editUrl;
+            } else {
+                console.error('Invalid memberId:', memberId);
+            }
+            debugger;
         }
     </script>
 </div>

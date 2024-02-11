@@ -1,17 +1,19 @@
 <form
     class="flex flex-col items-start mx-4 my-8 border-t border-eef0ef py-4"
     method="post"
-    action="{% url 'add' %}"
+    action="{% if is_add_form %}{% url 'add' %}{% else %}{% if member_to_edit and member_to_edit.id %}{% url 'edit' member_to_edit.id %}{% endif %}{% endif %}"
 >
     {% csrf_token %}
 
     <div class="mt-2 text-xl text-gray-500 font-bold">Info</div>
 
     {% comment %} TODO: based on this boolean call different post methods  {% endcomment %}
+    {% comment %} TODO: fix the logic for how the usr is being passed to the edit form {% endcomment %}
     {% if is_add_form %}
         <div>Add Form</div>
     {% else %}
         <div>Edit Form</div>
+        <div>{{ member_to_edit.name }}</div>
     {% endif %}
 
     {% comment %} TODO: consider putting into components if you have the time {%
@@ -26,7 +28,8 @@
                 placeholder="Charlene"
                 required
                 class="w-full px-3 py-2 border border-eef0ef rounded-md shadow-sm focus:outline-none focus:border-blue-500 placeholder-gray-400"
-            />
+                {% if not is_add_form %} value="{{ member_to_edit.name }}"{% endif %}
+              />
         </div>
         <div class="mt-4">
             <input
@@ -35,7 +38,8 @@
                 placeholder="Pham"
                 required
                 class="w-full px-3 py-2 border border-eef0ef rounded-md shadow-sm focus:outline-none focus:border-blue-500 placeholder-gray-400"
-            />
+                {% if not is_add_form %} value="{{ member_to_edit.position }}"{% endif %}
+                />
         </div>
         <div class="mt-4">
             <input
@@ -44,7 +48,8 @@
                 placeholder="charlene@instawork.com"
                 required
                 class="w-full px-3 py-2 border border-eef0ef rounded-md shadow-sm focus:outline-none focus:border-blue-500 placeholder-gray-400"
-            />
+                {% if not is_add_form %} value="{{ member_to_edit.phone }}"{% endif %}
+               />
         </div>
         <div class="mt-4">
             <input
@@ -53,7 +58,8 @@
                 required
                 placeholder="415-310-1619"
                 class="w-full px-3 py-2 border border-eef0ef rounded-md shadow-sm focus:outline-none focus:border-blue-500 placeholder-gray-400"
-            />
+                {% if not is_add_form %} value="{{ member_to_edit.email }}"{% endif %}
+                />
         </div>
     </div>
 
@@ -90,11 +96,10 @@
     </div>
 
     <div class="add-members__buttons-container">
+        {% if not is_add_form %}
         <button type="cancel" class="add-members__delete">Delete</button>
+        {% endif %}
+        
         <button type="submit" class="add-members__save">Save</button>
     </div>
-
-    {% comment %} TODO: add the edit button based on a condition and pass this
-    as a template {% endcomment %} {% comment %} TODO: see how to make a shared
-    component out of this form and then use it in 2 places {% endcomment %}
 </form>
