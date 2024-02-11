@@ -49,8 +49,6 @@ def index(request):
 
 def add(request): 
     context = {}
-    # you need to trigger this from the template
-    # TODO: get the fields from the request object 
     if request.method == 'POST': 
         name = request.POST.get('name')
         position = request.POST.get('position')
@@ -69,7 +67,7 @@ def add(request):
         members.append(new_member)
         request.session['members'] = members
     
-    
+    # TODO: extract the add_member content into a component and then call it in each of the forms
     return render(request, 'add_member/index.html', context)
 
 def edit(request): 
