@@ -50,12 +50,18 @@ def index(request):
 def add(request): 
     context = {}
     # you need to trigger this from the template
+    # TODO: get the fields from the request object 
     if request.method == 'POST': 
+        name = request.POST.get('name')
+        position = request.POST.get('position')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+
         new_member = {
-            'name': 'Max',
-            'position': 'Software engineer',
-            'phone': '111 111 1111',
-            'email': 'max@gmail.com',
+            'name': name,
+            'position': position,
+            'phone': phone,
+            'email': email,
         }
         members = request.session.get('members', [])
         print('members [add]:', len(members))
