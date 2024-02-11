@@ -87,4 +87,18 @@ def edit(request, member_index=None):
     else: 
         return HttpResponse('Invalid member index')
         
+def delete(request, member_id): 
+    # TODO: fix the bug with index, probably instead of giving id as numbers give unique ids from the uuid library
+    if request.method == 'DELETE':
+        members = request.session.get('members', [])
+        member_index = next((index for index, member in enumerate(members) if member['id'] == member_id), None)
+        
+        if member_index is not None:
+            deleted_member = members.pop(member_index)
+            request.session['members'] = members
+            return HttpResponse(f"Delete member with id {member_id}")
+        else: 
+            return HttpResponse(f"Error deleting member with id {member_id}")
+            
     
+# TODO: probably will have to add an update route as well 
