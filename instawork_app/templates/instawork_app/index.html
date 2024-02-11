@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    {% load static tailwind_tags %}
+    <head>
+        {% load static tailwind_tags %}
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Team management</title>
+        {% tailwind_css %} {% load static %} <link rel="stylesheet" href="{%
+        static "polls/style.css" %}">
+    </head>
+    <body>
+        <div class="relative w-full flex flex-col justify-start mx-4 mt-4 mb-3">
+            {% load static %}
+            <img class="absolute top-0 right-8 cursor-pointer" onclick="addMember()" width="20" height="20" src="{% static 'plus.svg' %}" />
+            
+            <div class="mt-8 text-2xl text-gray-500 font-bold">Team members</div>
+            {% comment %} TODO: add dynamic counting of the team memmbers {% endcomment %}
+            <div class="text-gray-500">You have 3 team members</div>
+        </div>
+        <div class="flex flex-col items-center mx-4 my-8">
+            {% for member in members%} 
+                {% include "./components/member.html" with member=member %}
+            {% endfor %}
+        </div>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team management</title>
-    
-    {% tailwind_css %}
+        {% comment %} 
+        <!-- TODO: see how to add different pages  -->
+        <!-- TODO: add the edit/add/delete a member functionality -->
+        TODO: fix the absence of autocomplete in django component
+        html files
+        {% endcomment %}
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static "polls/style.css" %}">
-</head>
-<body>
-    <div class="text-blue-500">Team management</div>
-
-    <!-- TODO: see how to work with UI components in Django -->
-
-    <!-- TODO: see how to add different pages  -->
-    <!-- TODO: add the edit/add/delete a member functionality -->
-</body>
+        <script>
+            function addMember() {
+                console.log('addMember triggered');
+                // manipulate the data by using the special notation
+                // TODO: figure out if there's a way to pass the data from the .py file to the .js file without writing the scripts in the html file 
+            }
+        </script>
+    </body>
 </html>
