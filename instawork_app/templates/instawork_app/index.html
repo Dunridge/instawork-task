@@ -10,22 +10,22 @@
         static "polls/style.css" %}">
     </head>
     <body>
-        <div class="container">
-            <div class="text-blue-500">Team management</div>
-            
-            {% comment %} TODO: pass in parameters to the cards {% endcomment %}
-            {% comment %} TODO: style each card with Tailwind {% endcomment %}
-
+        <div class="w-full flex flex-col justify-start mx-4 mt-4 mb-3">
+            <div class="text-2xl font-bold">Team members</div>
+            {% comment %} TODO: add dynamic counting of the team memmbers {% endcomment %}
+            <div class="text-gray-500">You have 3 team members</div>
+        </div>
+        <div class="flex flex-col items-center mx-4 my-8">
             {% for member in members%} 
-                {% include "./components/member.html" %}
+                {% include "./components/member.html" with member=member %}
             {% endfor %}
         </div>
 
         {% comment %} 
         <!-- TODO: see how to add different pages  -->
-        <!-- TODO: add the edit/add/delete a member functionality -->{%
-        endcomment %}
+        <!-- TODO: add the edit/add/delete a member functionality -->
+        TODO: fix the absence of autocomplete in django component
+        html files
         {% endcomment %}
-
     </body>
 </html>

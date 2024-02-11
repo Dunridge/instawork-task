@@ -2,11 +2,36 @@ from django.shortcuts import render
 
 def index(request):
     members = [
-        {'name': 'John Doe', 'position': 'Developer'},
-        {'name': 'Jane Doe', 'position': 'Designer'},
-        {'name': 'Jane Doe', 'position': 'Designer'},
-        {'name': 'Jane Doe', 'position': 'Designer'},
-        {'name': 'Jane Doe', 'position': 'Designer'},
+        { 
+            'name': 'Adrien Olczak', 
+            'position': 'admin', 
+            'phone': '415-310-1619',
+            'email': 'adrien@instaworks.com'
+        },
+        { 
+            'name': 'Adrien Olczak', 
+            'position': 'admin', 
+            'phone': '415-310-1619',
+            'email': 'adrien@instaworks.com'
+        },
+        { 
+            'name': 'Adrien Olczak', 
+            'position': 'admin', 
+            'phone': '415-310-1619',
+            'email': 'adrien@instaworks.com'
+        },
+        { 
+            'name': 'Adrien Olczak', 
+            'position': 'admin', 
+            'phone': '415-310-1619',
+            'email': 'adrien@instaworks.com'
+        },
+        { 
+            'name': 'Adrien Olczak', 
+            'position': 'admin', 
+            'phone': '415-310-1619',
+            'email': 'adrien@instaworks.com'
+        }
     ]
 
     context = {
