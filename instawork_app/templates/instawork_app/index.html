@@ -12,8 +12,12 @@
 </head>
 <body>
     <div class="text-blue-500">Team management</div>
+    {% comment %} TODO: see how to output these cards in a loop  {% endcomment %}
     {% include "./components/member.html" %}
-
+    
+    {% for member in members%}
+        <div>Test</div>
+    {% endfor %}
 
     {% comment %} TODO: define a card html and print it here in a loop  {% endcomment %}
 
