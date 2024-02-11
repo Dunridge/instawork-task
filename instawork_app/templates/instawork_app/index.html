@@ -12,7 +12,7 @@
     <body>
         <div class="relative w-full flex flex-col justify-start mx-4 mt-4 mb-3">
             {% load static %}
-            <img class="absolute top-0 right-8" width="20" height="20" src="{% static 'plus.svg' %}" />
+            <img class="absolute top-0 right-8 cursor-pointer" onclick="addMember()" width="20" height="20" src="{% static 'plus.svg' %}" />
             
             <div class="mt-8 text-2xl text-gray-500 font-bold">Team members</div>
             {% comment %} TODO: add dynamic counting of the team memmbers {% endcomment %}
@@ -30,5 +30,13 @@
         TODO: fix the absence of autocomplete in django component
         html files
         {% endcomment %}
+
+        <script>
+            function addMember() {
+                console.log('addMember triggered');
+                // manipulate the data by using the special notation
+                // TODO: figure out if there's a way to pass the data from the .py file to the .js file without writing the scripts in the html file 
+            }
+        </script>
     </body>
 </html>
