@@ -1,7 +1,32 @@
 
 /* TODO: see how to separate the styles between components */
 /* added tailwind.css so the style separation is not needed */
-/* 
-div {
+
+
+/* fix the padding on the radio buttons */
+.add-memebers__option {
+    padding: 8px 0;
+}
+
+/* TODO: try to replace with tailwind and fix the issue  */
+
+.add-members__buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-members__save {
+    background-color: #4B78F5;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 30px;
+    border-radius: 4px;
+}
+
+.add-members__delete {
+    border: 1px solid grey;
+    padding: 10px 20px;
     color: red;
-} */
+    margin-top: 30px;
+}
+

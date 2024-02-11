@@ -6,10 +6,27 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Team management</title>
-        {% tailwind_css %} {% load static %} <link rel="stylesheet" href="{%
-        static "polls/style.css" %}">
+        {% tailwind_css %} {% load static %} 
+        <link rel="stylesheet" href="{% static "polls/style.css" %}">
     </head>
     <body>
-        <div class="">Add member</div>
+        <div class="w-full flex flex-col justify-start mx-4 mt-4 mb-3">
+            {% load static %}
+            <img class="absolute top-2 left-8 cursor-pointer" onclick="routeToMembers()" width="20" height="20" src="{% static 'left-arrow.svg' %}" />
+            
+            <div class="mt-8 text-2xl text-gray-500 font-bold">
+                Add a team member
+            </div>
+            <div class="text-gray-500">Set email, location and role</div>
+        </div>
+
+        {% comment %} TODO: pass a boolean to this template and trigger different urls in the post based on that boolean {% endcomment %}
+        {% include 'forms/shared_form.html' with is_add_form=is_add_form %}
+
+        <script>
+            function routeToMembers() {
+                window.location.href="{% url 'index' %}";
+            }
+        </script>
     </body>
 </html>
