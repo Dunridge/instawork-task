@@ -10,8 +10,11 @@
         static "polls/style.css" %}">
     </head>
     <body>
-        <div class="w-full flex flex-col justify-start mx-4 mt-4 mb-3">
-            <div class="text-2xl font-bold">Team members</div>
+        <div class="relative w-full flex flex-col justify-start mx-4 mt-4 mb-3">
+            {% load static %}
+            <img class="absolute top-0 right-8" width="20" height="20" src="{% static 'plus.svg' %}" />
+            
+            <div class="mt-8 text-2xl text-gray-500 font-bold">Team members</div>
             {% comment %} TODO: add dynamic counting of the team memmbers {% endcomment %}
             <div class="text-gray-500">You have 3 team members</div>
         </div>
