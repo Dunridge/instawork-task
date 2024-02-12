@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 def index(request):
     members = [
@@ -60,6 +60,8 @@ def add(request):
         members.append(new_member)
         request.session['members'] = members
         print('members [new member]', members)
+        
+        return redirect('index')
     
     # TODO: extract the add_member content into a component and then call it in each of the forms
     return render(request, 'add_member/index.html', context)

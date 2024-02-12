@@ -1,7 +1,8 @@
 <form
     class="flex flex-col items-start mx-4 my-8 border-t border-eef0ef py-4"
     method="post"
-    action="{% if is_add_form %}{% url 'add' %}{% else %}{% if member_to_edit and member_to_edit.id %}{% url 'edit' member_to_edit.id %}{% endif %}{% endif %}"
+    {% comment %} action="{% if is_add_form %}{% url 'add' %}{% else %}{% if member_to_edit and member_to_edit.id %}{% url 'edit' member_to_edit.id %}{% endif %}{% endif %}" {% endcomment %}
+    action="{% if is_add_form %}{% url 'add' %}{% else %}{% if member_to_edit and member_to_edit.id %}{% url 'edit' member_to_edit.id %}{% else %}{% url 'index' %}{% endif %}{% endif %}"
 >
     {% csrf_token %}
 
@@ -104,7 +105,7 @@
         {% comment %} TODO: find a library for the Django formatter {% endcomment %}
         
         {% comment %} if not is_add_form: then update the user else: add the user (trigger submit)  {% endcomment %}
-        <button type="submit" class="add-members__save">Save</button>
+        <button type="submit" id="saveButton" class="add-members__save">Save</button>
     </div>
 </form>
 
@@ -112,8 +113,8 @@
     document.getElementById('deleteButton').addEventListener('click', function (e) {
         e.preventDefault();
         console.log('deleteButton clicked');
-        const deletionIsConfirmed = window.confirm('Are you sure you want to delete this user?');
-        //{% comment %} const deletionIsConfirmed = confirm('Are you sure you want to delete this user?')); {% endcomment %}
+        const deletionIsConfirmed = true; // for quicker debugging
+        // {% comment %} const deletionIsConfirmed = window.confirm('Are you sure you want to delete this user?'); {% endcomment %}
         if (deletionIsConfirmed) {
             const memberId={{ member_to_edit.id }};
             const deleteUrl = this.getAttribute('data-delete-url');
@@ -130,10 +131,8 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // Handle success, e.g., remove the deleted user from the UI
                     console.log('User deleted successfully');
-                    alert('User deleted successfully');
-                    // Optionally, you can also update the session or any other logic on the client side
+                    window.location.href = '{% url "index" %}';
                 } else {
                     console.error('Error deleting user');
                 }
@@ -142,8 +141,6 @@
                 console.error('Error:', error);
             });
         }
-        
-    
         // TODO: add the role field to the form 
     });
 </script>
