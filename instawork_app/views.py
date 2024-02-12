@@ -83,7 +83,21 @@ def edit(request, member_index=None):
         }
 
         if request.method == 'POST': 
-            return HttpResponse('EDIT REQUEST POST REACHED')
+            name = request.POST.get('name')
+            position = request.POST.get('position')
+            phone = request.POST.get('phone')
+            email = request.POST.get('email')
+            
+            member_to_edit['name'] = name
+            member_to_edit['position'] = position
+            member_to_edit['phone'] = phone
+            member_to_edit['email'] = email
+            
+            request.session['members'] = members
+            
+            print('in the post', email)
+            
+            return redirect('index')
 
         return render(request, 'edit_member/index.html', context)
     else: 
