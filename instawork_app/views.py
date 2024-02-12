@@ -14,9 +14,6 @@ def index(request):
 
     session_members = request.session.get('members', [])
     all_members = members + session_members
-    print('session_members [index]', len(session_members))
-    print('members [index]', len(members))
-    print('all_members [index]', len(all_members))
 
     context = {
         'members': all_members,
@@ -59,7 +56,6 @@ def edit(request, member_index=None):
     members = request.session.get('members', [])
     member_index = int(member_index)
 
-    print('member_index', member_index)
     if member_index is not None and 0 <= member_index <= len(members):
         arr_index = member_index - 1
         member_to_edit = members[arr_index]

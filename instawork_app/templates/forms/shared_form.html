@@ -89,7 +89,6 @@
 <script>
     document.getElementById('deleteButton').addEventListener('click', function (e) {
         e.preventDefault();
-        console.log('deleteButton clicked');
         const deletionIsConfirmed = true; // for quicker debugging
         // {% comment %} const deletionIsConfirmed = window.confirm('Are you sure you want to delete this user?'); {% endcomment %}
         if (deletionIsConfirmed) {
@@ -97,7 +96,6 @@
             const deleteUrl = this.getAttribute('data-delete-url');
             // TODO: remove the user from the members array 
             // TODO: route the user to the team members page to show all of the team members
-            console.log('deletionIsConfirmed', memberId, deleteUrl);
 
             fetch(deleteUrl, {
                 method: 'DELETE',
@@ -108,7 +106,6 @@
             })
             .then(response => {
                 if (response.ok) {
-                    console.log('User deleted successfully');
                     window.location.href = '{% url "index" %}';
                 } else {
                     console.error('Error deleting user');
