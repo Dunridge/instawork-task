@@ -7,7 +7,7 @@ def index(request):
         # {
         #     'id': 1, # start with 1 because 0 evaluates to false  
         #     'name': 'Adrien Olczak', 
-        #     'position': 'admin', 
+        #     'surname': 'admin', 
         #     'phone': '415-310-1619',
         #     'email': 'adrien@instaworks.com'
         # }
@@ -40,7 +40,7 @@ def add(request):
 
     if request.method == 'POST': 
         name = request.POST.get('name')
-        position = request.POST.get('position')
+        surname = request.POST.get('surname')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
 
@@ -50,7 +50,7 @@ def add(request):
         new_member = {
             'id': new_member_id, # TODO: fix this bug 
             'name': name,
-            'position': position,
+            'surname': surname,
             'phone': phone,
             'email': email,
         }
@@ -84,12 +84,12 @@ def edit(request, member_index=None):
 
         if request.method == 'POST': 
             name = request.POST.get('name')
-            position = request.POST.get('position')
+            surname = request.POST.get('surname')
             phone = request.POST.get('phone')
             email = request.POST.get('email')
             
             member_to_edit['name'] = name
-            member_to_edit['position'] = position
+            member_to_edit['surname'] = surname
             member_to_edit['phone'] = phone
             member_to_edit['email'] = email
             
