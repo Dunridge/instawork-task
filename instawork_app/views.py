@@ -3,16 +3,7 @@ from django.shortcuts import redirect, render
 from .forms import MemberForm
 
 def index(request):
-    members = [
-        # TODO: fix the issue so that you have at least one user (OPTIONAL - if you have time)
-        # {
-        #     'id': 1, # start with 1 because 0 evaluates to false  
-        #     'name': 'Adrien Olczak', 
-        #     'surname': 'admin', 
-        #     'phone': '415-310-1619',
-        #     'email': 'adrien@instaworks.com'
-        # }
-    ]
+    members = []
     
     if 'members' not in request.session:
         request.session['members'] = members
@@ -66,9 +57,11 @@ def add(request):
 
 def edit(request, member_index=None):
     members = request.session.get('members', [])
+    member_index = int(member_index)
 
-    if 0 <= member_index < len(members):
-        arr_index = member_index
+    print('member_index', member_index)
+    if member_index is not None and 0 <= member_index <= len(members):
+        arr_index = member_index - 1
         member_to_edit = members[arr_index]
 
         if request.method == 'POST':
