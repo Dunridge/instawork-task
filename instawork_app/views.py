@@ -1,17 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from .forms import MemberForm
 
 def index(request):
-    members = [
-        # TODO: fix the issue so that you have at least one user (OPTIONAL - if you have time)
-        # {
-        #     'id': 1, # start with 1 because 0 evaluates to false  
-        #     'name': 'Adrien Olczak', 
-        #     'position': 'admin', 
-        #     'phone': '415-310-1619',
-        #     'email': 'adrien@instaworks.com'
-        # }
-    ]
+    members = []
     
     if 'members' not in request.session:
         request.session['members'] = members
@@ -32,75 +24,76 @@ def index(request):
 
     return render(request, 'instawork_app/index.html', context)
 
-def add(request): 
+def add(request):
+
+    if request.method == 'POST':
+        form = MemberForm(request.POST)
+
+        if form.is_valid():
+            new_member_id = len(request.session.get('members', [])) + 1
+            new_member = {
+                'id': new_member_id,
+                'name': form.cleaned_data['name'],
+                'surname': form.cleaned_data['surname'],
+                'phone': form.cleaned_data['phone'],
+                'email': form.cleaned_data['email'],
+                'role': form.cleaned_data['role'],
+            }
+
+            members = request.session.get('members', [])
+            members.append(new_member)
+            request.session['members'] = members
+
+            return redirect('index')
+    else:
+        form = MemberForm()  
 
     context = {
-        'is_add_form': True
+        'is_add_form': True,
+        'form': form
     }
 
-    if request.method == 'POST': 
-        name = request.POST.get('name')
-        position = request.POST.get('position')
-        phone = request.POST.get('phone')
-        email = request.POST.get('email')
-
-
-        members = request.session.get('members', [])
-        new_member_id = len(members) + 1
-        new_member = {
-            'id': new_member_id, # TODO: fix this bug 
-            'name': name,
-            'position': position,
-            'phone': phone,
-            'email': email,
-        }
-        print('member [new member]', new_member)
-        print('members [add]:', len(members))
-
-        members.append(new_member)
-        request.session['members'] = members
-        print('members [new member]', members)
-        
-        return redirect('index')
-    
-    # TODO: extract the add_member content into a component and then call it in each of the forms
     return render(request, 'add_member/index.html', context)
 
-def edit(request, member_index=None): 
+def edit(request, member_index=None):
     members = request.session.get('members', [])
+    member_index = int(member_index)
 
-    print('members', members)
-    print('member_index [edit]',member_index)
-    print('len(members)', len(members))
-    
-    if 0 <= member_index <= len(members): 
+    print('member_index', member_index)
+    if member_index is not None and 0 <= member_index <= len(members):
         arr_index = member_index - 1
         member_to_edit = members[arr_index]
 
+        if request.method == 'POST':
+            form = MemberForm(request.POST)
+
+            if form.is_valid():
+                member_to_edit['name'] = form.cleaned_data['name']
+                member_to_edit['surname'] = form.cleaned_data['surname']
+                member_to_edit['phone'] = form.cleaned_data['phone']
+                member_to_edit['email'] = form.cleaned_data['email']
+                member_to_edit['role'] = form.cleaned_data['role']
+
+                request.session['members'] = members
+
+                return redirect('index')
+        else:
+            form = MemberForm(initial={
+                'name': member_to_edit['name'],
+                'surname': member_to_edit['surname'],
+                'phone': member_to_edit['phone'],
+                'email': member_to_edit['email'],
+                'role': member_to_edit.get('role', ['Regular']),
+            })
+
         context = {
             'is_add_form': False,
-            'member_to_edit': member_to_edit
+            'member_to_edit': member_to_edit,
+            'form': form,
         }
 
-        if request.method == 'POST': 
-            name = request.POST.get('name')
-            position = request.POST.get('position')
-            phone = request.POST.get('phone')
-            email = request.POST.get('email')
-            
-            member_to_edit['name'] = name
-            member_to_edit['position'] = position
-            member_to_edit['phone'] = phone
-            member_to_edit['email'] = email
-            
-            request.session['members'] = members
-            
-            print('in the post', email)
-            
-            return redirect('index')
-
         return render(request, 'edit_member/index.html', context)
-    else: 
+    else:
         return HttpResponse('Invalid member index')
         
 def delete(request, member_id): 
