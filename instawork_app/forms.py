@@ -7,5 +7,6 @@ class MemberForm(forms.Form):
     email = forms.EmailField()
     role = forms.ChoiceField(
         choices=[('regular', 'Regular - Can\'t delete members'), ('admin', 'Admin - Can delete members')],
-        widget=forms.RadioSelect
+        widget=forms.RadioSelect,
+        initial='regular'
     )
